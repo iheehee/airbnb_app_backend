@@ -8,12 +8,14 @@ flake8 = "*"
 black = "*"
 
 [packages]
-django = "*"
 pillow = "*"
-django-seed = "*"
+faker = "*"
+django = "3.1.12"
+django-seed = "0.1.9"
+psycopg2-binary = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.10.2"
 
 [pipenv]
 allow_prereleases = true

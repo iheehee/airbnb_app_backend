@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_seed",
 ]
 
 PROJECT_APPS = [
@@ -132,3 +133,5 @@ MEDIA_URL = "/media/"
 # Auth
 
 AUTH_USER_MODEL = "users.User"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
