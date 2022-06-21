@@ -3,6 +3,4 @@ from . import views
 
 app_name = "core"
 
-urlpatterns = [
-    path("list", views.list_rooms)
-    ]
+urlpatterns = []
