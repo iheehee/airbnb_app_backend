@@ -4,8 +4,9 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rooms.serializers import RoomSerializer
 from .models import Room
-from .serializers import ReadRoomSerializer, WriteRoomSerializer
+from .serializers import RoomSerializer
 
 
 # class ListRoomsView(ListAPIView):
@@ -15,16 +16,16 @@ from .serializers import ReadRoomSerializer, WriteRoomSerializer
 class RoomsView(APIView):
     def get(self, request):
         room = Room.objects.all()[:5]
-        serializer = ReadRoomSerializer(room, many=True).data
+        serializer = RoomSerializer(room, many=True).data
         return Response(serializer)
 
     def post(self, request):
         if not request.user.is_authenticated:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = WriteRoomSerializer(data=request.data)
+        serializer = RoomSerializer(data=request.data)
         if serializer.is_valid():
             room = serializer.save(user=request.user)
-            room_serializer = ReadRoomSerializer(room)
+            room_serializer = RoomSerializer(room)
             return Response(date=room_serializer, status=status.HTTP_200_OK)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -42,7 +43,7 @@ class RoomView(APIView):
         room = self.get_room(pk)
         if room is not None:
             room = self.get_room(pk)
-            serializer = ReadRoomSerializer(room).data
+            serializer = RoomSerializer(room).data
             return Response(serializer)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -55,7 +56,7 @@ class RoomView(APIView):
             serializer = WriteRoomSerializer(room, data=request.data, partial=True)
             if serializer.is_valid():
                 room = serializer.save()
-                return Response(ReadRoomSerializer(room).data)
+                return Response(RoomSerializer(room).data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response()
