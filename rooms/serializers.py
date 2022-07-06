@@ -9,7 +9,7 @@ class RoomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Room
-        exclude = ("user", "modified", "created")
+        exclude = ("modified",)
         read_only_fields = ("user", "id", "created", "updated")
 
     def validate_beds(self, beds):
