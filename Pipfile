@@ -17,6 +17,8 @@ djangorestframework = "*"
 drf-yasg = "*"
 flex = "*"
 pyjwt = "*"
+django-filter = "*"
+markdown = "*"
 
 [requires]
 python_version = "3.10.2"

@@ -37,6 +37,11 @@ class RoomSerializer(serializers.ModelSerializer):
                 return obj in user.favs.all()
         return False
 
+    def create(self, validated_data):
+        request = self.context.get("request")
+        room = Room.objects.create(**validated_data, user=request.user)
+        return room
+
 
 class BigRoomSerializer(serializers.ModelSerializer):
     class Meta:
